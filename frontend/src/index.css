@@ -1,0 +1,192 @@
+/* Chromomorphism / Liquid Metal Design Tokens & Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&display=swap');
+
+:root {
+  --bg-gunmetal-start: #1C1D21;
+  --bg-gunmetal-end: #2A2C33;
+  --chrome-gradient: linear-gradient(135deg, #E8E9EC 0%, #A8ABB4 25%, #F5F6F8 45%, #6E7178 65%, #D4D6DA 85%, #F0F1F3 100%);
+  --iridescent-glow: conic-gradient(from 180deg, #7EE8FA, #C9A7F5, #FFB6D9, #A0F0C8, #7EE8FA);
+  
+  --text-primary: #F4F4F6;
+  --text-secondary: #9A9CA5;
+  --text-muted: #6E7178;
+  
+  --alert-amber: #D4A054;
+  --alert-red: #C25B4A;
+  --alert-green: #52B788;
+  --alert-blue: #4EA8DE;
+
+  --flow-offset: 0%;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--alert-green); }
+  50% { opacity: 0.5; box-shadow: 0 0 16px var(--alert-green); }
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-gunmetal-start) 0%, var(--bg-gunmetal-end) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Headers & Display Numbers */
+h1, h2, h3, .metric-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Tabular Numerals for Live Updates */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chromomorphism Liquid Metal Card Surface */
+.chrome-card {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #E8E9EC 0%,
+    #A8ABB4 20%,
+    #F5F6F8 40%,
+    #6E7178 60%,
+    #D4D6DA 80%,
+    #F0F1F3 100%
+  );
+  background-size: 300% 300%;
+  background-position: var(--flow-offset, 0%) center;
+  border-radius: 20px;
+  padding: 2px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: background-position 0.4s ease, transform 0.25s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.chrome-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 20px 60px rgba(0, 0, 0, 0.65),
+    0 4px 12px rgba(126, 232, 250, 0.15);
+}
+
+/* Pointer-tracked Iridescent Glow Reflection */
+.chrome-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(126, 232, 250, 0.4) 0%,
+    rgba(201, 167, 245, 0.25) 25%,
+    rgba(255, 182, 217, 0.15) 45%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.chrome-card:hover::before {
+  opacity: 1;
+}
+
+/* Scroll-linked shimmer sweep */
+.chrome-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+@keyframes shimmer-sweep {
+  0% { background-position: -100% center; }
+  60% { background-position: 250% center; }
+  100% { background-position: 250% center; }
+}
+
+/* Dark Chrome Container Scrim */
+.chrome-scrim {
+  background: linear-gradient(160deg, rgba(32, 33, 40, 0.92) 0%, rgba(22, 23, 28, 0.96) 100%);
+  border-radius: 18px;
+  padding: 1.35rem;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Button & Badge Metallic Styling */
+.btn-chrome {
+  background: linear-gradient(135deg, #E8E9EC 0%, #A8ABB4 100%);
+  color: #1C1D21;
+  font-weight: 700;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-chrome:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(126, 232, 250, 0.4);
+}
+
+/* Risk Badges */
+.badge-risk {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-critical { background: rgba(194, 91, 74, 0.2); color: var(--alert-red); border: 1px solid var(--alert-red); }
+.badge-high { background: rgba(212, 160, 84, 0.2); color: var(--alert-amber); border: 1px solid var(--alert-amber); }
+.badge-medium { background: rgba(78, 168, 222, 0.2); color: var(--alert-blue); border: 1px solid var(--alert-blue); }
+.badge-low { background: rgba(82, 183, 136, 0.2); color: var(--alert-green); border: 1px solid var(--alert-green); }
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-gunmetal-start);
+}
+::-webkit-scrollbar-thumb {
+  background: #6E7178;
+  border-radius: 3px;
+}

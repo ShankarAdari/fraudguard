@@ -1,0 +1,22 @@
+{
+  "experiment_name": "FraudGuard_Transaction_Risk_Scoring",
+  "run_id": "run_984f82a17b0d4e9c",
+  "artifact_uri": "mlflow-artifacts:/1/984f82a17b0d4e9c/artifacts",
+  "registered_model_name": "fraudguard_xgboost_model",
+  "version": "v1.2.0-xgboost",
+  "parameters": {
+    "max_depth": 6,
+    "learning_rate": 0.05,
+    "n_estimators": 150,
+    "scale_pos_weight": 4.5,
+    "eval_metric": "aucpr"
+  },
+  "metrics": {
+    "accuracy": 0.9642,
+    "roc_auc": 0.9815,
+    "precision": 0.941,
+    "recall": 0.912,
+    "f1_score": 0.9263
+  },
+  "status": "READY"
+}

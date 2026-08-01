@@ -1,0 +1,14 @@
+# Node dependencies
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Python / Environment
+__pycache__/
+*.pyc
+.env
+venv/
+
+# Screenshots & OS files
+*.png
+.DS_Store
